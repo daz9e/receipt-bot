@@ -1,0 +1,14 @@
+services:
+  receipt-bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - ALLOWED_USERS=${ALLOWED_USERS:-}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENROUTER_MODEL=${OPENROUTER_MODEL:-openai/gpt-5-nano}
+      - OPENROUTER_TEXT_MODEL=${OPENROUTER_TEXT_MODEL:-openai/gpt-5-nano}
+      - DB_PATH=/data/receipts.db
+      - RECEIPTS_DIR=/data/receipts
+    volumes:
+      - ./data:/data
